@@ -28,15 +28,15 @@ class DiseaseController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|string|max:200|min:3',
+            'name' => 'required|string|max:200|min:3|unique:diseases',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1024|nullable',
             'description' => 'required|string|max:5000|min:3',
         ]);
 
         if ($request->hasfile('image')) {
             $file = $request->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . rand(1000, 9999) . '.' . $extention;
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . rand(1000, 9999) . '.' . $extension;
             $file->move('uploads/', $filename);
             $request->image = $filename;
         }
@@ -73,39 +73,34 @@ class DiseaseController extends Controller
 
     public function update(Request $request, $id)
     {
-        $disease = DB::table('diseases')->find($id);
-
         $request->validate([
             'name' => 'required|string|max:200|min:3',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1024|nullable',
             'description' => 'required|string|max:5000|min:3',
         ]);
 
-        $date = new DateTime('now');
-
-        if ($request->hasfile('image')) {
-
-            $destination = 'uploads/' . $disease->image;
-            if (File::exists($destination)) {
+        $disease = Disease::find($id);
+        $disease->name = $request->name;
+        $disease->description = $request->description;
+        $disease->status = $request->status == true ? '1' : '0';
+        
+        
+        if($request->hasfile('image'))
+        {
+            $destination = 'uploads/'.$disease->image;
+            if(File::exists($destination)){
                 File::delete($destination);
             }
-
             $file = $request->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . rand(1000, 9999) . '.' . $extention;
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().rand(1000, 9999).'.'.$extension;
             $file->move('uploads/', $filename);
-            $request->image = $filename;
+            $disease->image = $filename;
         }
 
-        $disease = array(
-            'name' => $request->name,
-            'description' => $request->description,
-            'status' => $request->status == true ? '1' : '0',
-            'updated_at' => $date,
-            'image' => $request->image,
-        );
-
-        $result = DB::table('diseases')->where('id', $id)->update($disease);
+        
+        //dd($disease);
+        $disease->update();
 
         return redirect()->route('admin.disease.index')->with('status', 'Disease Updated Successfully');
     }
@@ -122,6 +117,6 @@ class DiseaseController extends Controller
 
         $result = DB::table('diseases')->where('id', $id)->delete();
 
-        return redirect()->route('admin.disease.index')->with('message', 'Disease Deleted Successfully');
+        return redirect()->route('admin.disease.index')->with('status', 'Disease Deleted Successfully');
     }
 }

@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea type="text" name="description" class="form-control" placeholder="Description"
-                                    value="{{ old('Short description') }}" autocomplete="description"></textarea>
+                                    value="{{ old('description') }}" autocomplete="description"></textarea>
                             </div>
 
                             <div class="form-group">

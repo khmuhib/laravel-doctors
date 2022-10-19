@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('disease_id');
+            $table->string('disease_id');
             $table->foreignId('doctor_category_id');
             $table->string('name');
             $table->string('reg_no');
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('status');
-            $table->foreign('disease_id')->references('id')->on('diseases');
             $table->foreign('doctor_category_id')->references('id')->on('doctor_categories');
             $table->timestamps();
         });

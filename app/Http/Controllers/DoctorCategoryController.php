@@ -2,84 +2,87 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DoctorCategory;
+use DateTime;
 use Illuminate\Http\Request;
+use App\Models\DoctorCategory;
+use Illuminate\Support\Facades\DB;
 
 class DoctorCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        $doctorCategories = DB::table('doctor_categories')->get();
+        return view('page.admin.doctor_category.index', compact('doctorCategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return view('page.admin.doctor_category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:200|min:3|unique:doctor_categories',
+        ]);
+
+        $date = new DateTime('now');
+
+        $data = array(
+            'name' => $request->name,
+            'status' => $request->status == true ? '1' : '0',
+            'created_at' => $date,
+        );
+
+        //dd($data);
+
+        $result = DB::table('doctor_categories')->insert($data);
+
+        return redirect()->route('admin.doctor.category.index')->with('status', 'Doctor Category Inserted Successfully');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DoctorCategory  $doctorCategory
-     * @return \Illuminate\Http\Response
-     */
     public function show(DoctorCategory $doctorCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DoctorCategory  $doctorCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DoctorCategory $doctorCategory)
+    
+    public function edit($id)
     {
-        //
+        $doctorCategory = DB::table('doctor_categories')->find($id);
+        //$doctorCategory = DoctorCategory::find($id);
+        return view('page.admin.doctor_category.edit', compact('doctorCategory'));
+        //dd($doctorCategory);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DoctorCategory  $doctorCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DoctorCategory $doctorCategory)
+    
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:200|min:3',
+        ]);
+
+        $doctorCategory = DoctorCategory::find($id);
+
+        $doctorCategory->name = $request->name;
+        $doctorCategory->status = $request->status == true ? '1' : '0';
+
+        $doctorCategory->update();
+
+        return redirect()->route('admin.doctor.category.index')->with('status', 'Doctor Category Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DoctorCategory  $doctorCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DoctorCategory $doctorCategory)
+    
+    public function delete($id)
     {
-        //
+        
+        $doctorCategory = DB::table('doctor_categories')->find($id);
+        $result = DB::table('doctor_categories')->where('id', $id)->delete();
+
+        return redirect()->route('admin.doctor.category.index')->with('status', 'Doctor Category Deleted Successfully');
     }
 }

@@ -55,9 +55,17 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
 
     Route::get('doctor/category/list', [DoctorCategoryController::class, 'index'])->name('admin.doctor.category.index');
     Route::get('doctor/category/create', [DoctorCategoryController::class, 'create'])->name('admin.doctor.category.create');
+    Route::post('doctor/category/store', [DoctorCategoryController::class, 'store'])->name('admin.doctor.category.store');
+    Route::get('doctor/category/edit/{id}', [DoctorCategoryController::class, 'edit'])->name('admin.doctor.category.edit');
+    Route::put('doctor/category/update/{id}', [DoctorCategoryController::class, 'update'])->name('admin.doctor.category.update');
+    Route::get('doctor/category/delete/{id}', [DoctorCategoryController::class, 'delete'])->name('admin.doctor.category.delete');
 
-    Route::get('doctor/list/', [DoctorController::class, 'index'])->name('admin.doctor.index');
-    Route::get('doctor/create/', [DoctorController::class, 'create'])->name('admin.doctor.create');
+    Route::get('doctor/list', [DoctorController::class, 'index'])->name('admin.doctor.index');
+    Route::get('doctor/create', [DoctorController::class, 'create'])->name('admin.doctor.create');
+    Route::post('doctor/store', [DoctorController::class, 'store'])->name('admin.doctor.store');
+    Route::get('doctor/edit/{id}', [DoctorController::class, 'edit'])->name('admin.doctor.edit');
+    Route::put('doctor/update/{id}', [DoctorController::class, 'update'])->name('admin.doctor.update');
+    Route::get('doctor/delete/{id}', [DoctorController::class, 'delete'])->name('admin.doctor.delete');
 
 
 });
