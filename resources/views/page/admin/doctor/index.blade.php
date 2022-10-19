@@ -85,20 +85,20 @@
                                 @endforeach
 
                             </td>
-                            <td>{{ $doctor->doctor_category_id ?  }}</td>
+                            <td>{{ $doctor->getDoctorCategoryName() }}</td>
                             <td>
-                                <img src="{{ asset('uploads/'.$disease->image) }}"
+                                <img src="{{ asset('uploads/doctor/'.$doctor->image) }}"
                                         alt="" style="height: 50px; width: 50px">
                             </td>
                             <td>
                                 <small class="{{ $doctor->status == '1' ? 'bg-danger' : 'bg-success' }} p-1 rounded">{{ $doctor->status == '1' ? 'Inactive' : 'Active' }}</small>
                             </td>
                             <td>
-                                <a href="">Edit</a>
-                                <a href="">Delete</a>
+                                <a href="{{ route('admin.doctor.edit', ['id'=>$doctor->id]) }}">Edit</a>
+                                <a href="{{ route('admin.doctor.delete', ['id'=>$doctor->id]) }}">Delete</a>
                             </td>
                         </tr>
-                            
+
                         @endforeach
                     </tbody>
                 </table>
@@ -109,10 +109,10 @@
 
     </section>
 @endsection
-{{-- 
-    
+{{--
+
     doctor
-    
+
     @section('script_footer')
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>

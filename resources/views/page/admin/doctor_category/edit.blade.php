@@ -42,8 +42,9 @@
             </div>
         @endif
 
-        <form method="post" enctype="multipart/form-data" action="{{ route('admin.doctor.category.store') }}">
+        <form method="post" enctype="multipart/form-data" action="{{ route('admin.doctor.category.update', ['id'=>$doctorCategory->id]) }}">
             @csrf
+            @method('PUT')
             <div class="row">
                 <div class="col-md-6">
                     <div class="card card-primary">
@@ -69,7 +70,7 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                    
+
 
                 <div class="row">
                     <div class="col-12">

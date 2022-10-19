@@ -66,7 +66,7 @@ class DiseaseController extends Controller
     public function edit($id)
     {
         //$disease = DB::table('diseases')->find($id);
-        $disease = DB::table('diseases')->find($id);
+        $disease = DB::table('diseases')->where('id', $id)->first();
         return view('page.admin.disease.edit', compact('disease'));
     }
 
@@ -83,8 +83,8 @@ class DiseaseController extends Controller
         $disease->name = $request->name;
         $disease->description = $request->description;
         $disease->status = $request->status == true ? '1' : '0';
-        
-        
+
+
         if($request->hasfile('image'))
         {
             $destination = 'uploads/'.$disease->image;
@@ -98,7 +98,7 @@ class DiseaseController extends Controller
             $disease->image = $filename;
         }
 
-        
+
         //dd($disease);
         $disease->update();
 
