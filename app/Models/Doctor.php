@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Doctor extends Model
 {
@@ -19,6 +20,7 @@ class Doctor extends Model
         'phone',
         'email',
         'phone',
+        'image',
         'status',
     ];
 
@@ -30,6 +32,11 @@ class Doctor extends Model
         if($this->category) {
             return $this->category->name;
         }
+    }
+
+    public function getDoctorImage()
+    {
+        return Storage::url($this->image);
     }
 
 
