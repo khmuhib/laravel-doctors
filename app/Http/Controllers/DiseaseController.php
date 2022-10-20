@@ -79,6 +79,14 @@ class DiseaseController extends Controller
             'description' => 'required|string|max:5000|min:3',
         ]);
 
+        $olddata = Disease::where('id',$id)->where('name',$request->name)->first();
+
+        if(empty($olddata)){
+            $request->validate([
+                'name' => 'required|string|max:200|min:3|unique:diseases'
+            ]);
+        }
+
         $disease = Disease::find($id);
         $disease->name = $request->name;
         $disease->description = $request->description;
@@ -97,7 +105,6 @@ class DiseaseController extends Controller
             $file->move('uploads/', $filename);
             $disease->image = $filename;
         }
-
 
         //dd($disease);
         $disease->update();

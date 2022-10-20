@@ -16,9 +16,8 @@ class DoctorController extends Controller
     public function index()
     {
         $diseases =  DB::table('diseases')->where('status', '0')->get();
-        $doctors = Doctor::all();
-        $doctorCategories = DoctorCategory::all();
-        return view('page.admin.doctor.index', compact('doctors', 'diseases', 'doctorCategories'));
+        $doctors = Doctor::orderBy('id','DESC')->with('category' )->get();
+        return view('page.admin.doctor.index', compact('doctors','diseases'));
     }
 
 
@@ -64,15 +63,17 @@ class DoctorController extends Controller
         }
 
         $input = $request['disease_id'];
-        $doctor['disease_id'] = implode(',', $input);
+
+        $doctor['disease_id'] = json_encode($input);
         DB::table('doctors')->insert($doctor);
         return redirect()->route('admin.doctor.index')->with('status', 'Doctor Inserted Successfully');
     }
 
 
-    public function show(Doctor $doctor)
+    public function show($id)
     {
-        //
+        $doctor = DB::table('doctors')->find($id);
+        return view('page.admin.doctor.view', compact('doctor'));
     }
 
 
@@ -88,8 +89,7 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $doctor = DB::table('doctors')->find($id);
-
-        //dd($request->all());
+        $doctosoldimage=$doctor->image;
 
         $request->validate([
             'name' => 'required|string|max:200|min:3',
@@ -113,34 +113,11 @@ class DoctorController extends Controller
         $doctor['doctor_category_id'] = $request->doctor_category_id;
         $doctor['email'] = $request->email;
         $doctor['status'] = $request->status == true ? '1' : '0';
-
-        // if ($image = $request->file('image')) {
-        //     $destinationPath = 'uploads/doctor/';
-        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        //     $image->move($destinationPath, $profileImage);
-        //     $doctor['image'] = "$profileImage";
-        // }else{
-        //     unset($doctor['image']);
-        // }
-
-        // if ($request->hasFile('image')) {
-        //     // Delete old avatar
-        //     if ($doctor->image) {
-        //         Storage::delete($doctor->image);
-        //     }
-        //     // Store avatar
-        //     $avatar_path = $request->file('employee_photo')->store('employees', 'public');
-        //     // Save to Database
-        //     $doctor->image = $avatar_path;
-        // }
-
         if($request->hasfile('image'))
         {
-            $destination = 'uploads/doctor/'.$doctor['image'] = $request->image;
-            if(File::exists($destination)){
-                File::delete($destination);
+            if($doctosoldimage !=null){
+                unlink("uploads/doctor/".$doctosoldimage);
             }
-
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time().rand(1000, 9999).'.'.$extension;
@@ -149,7 +126,8 @@ class DoctorController extends Controller
         }
 
         $input = $request['disease_id'];
-        $doctor['disease_id'] = implode(',', $input);
+
+        $doctor['disease_id'] = json_encode($input);
         DB::table('doctors')->where('id', $id)->update($doctor);
         return redirect()->route('admin.doctor.index')->with('status', 'Doctor Update Successfully');
     }

@@ -52,7 +52,8 @@
             </div>
         @endif
 
-        <form method="post" enctype="multipart/form-data" action="{{ route('admin.doctor.update', ['id' => $doctor->id]) }}">
+        <form method="post" enctype="multipart/form-data"
+            action="{{ route('admin.doctor.update', ['id' => $doctor->id]) }}">
             @csrf
             @method('PUT')
             <div class="row">
@@ -103,7 +104,7 @@
                                 <label>Diseases</label>
                                 <select class="select2" multiple="multiple" data-placeholder="Select At Least 5 Disease"
                                     style="width: 100%;" name="disease_id[]">
-                                    @foreach ($diseases as $disease)
+                                    {{-- @foreach ($diseases as $disease)
                                         <option value="{{ $disease->id }}">{{ $disease->name }}</option>
                                     @endforeach
 
@@ -114,6 +115,19 @@
                                         @if (in_array("$disease->id", $values))
                                         <option value="{{ $disease->id }}" selected>{{ $disease->name }}</option>
                                         @endif
+                                    @endforeach --}}
+
+                                    @php
+                                        $values = json_decode($doctor->disease_id);
+                                    @endphp
+
+
+                                    @foreach ($diseases as $disease)
+                                        @foreach ($values as $value)
+                                            @if ($disease->id == $value)
+                                                <option value="{{ $disease->id }}" selected>{{ $disease->name }}</option>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>
@@ -123,7 +137,9 @@
                                 <select class="select2 form-control" style="width: 100%;"
                                     data-placeholder="Select At Least 5 Disease" name="doctor_category_id">
                                     @foreach ($doctorCategories as $doctorCategory)
-                                        <option value="{{ $doctorCategory->id}}" {{$doctor->doctor_category_id == $doctorCategory->id ? 'selected':''}}>{{ $doctorCategory->name }}</option>
+                                        <option value="{{ $doctorCategory->id }}"
+                                            {{ $doctor->doctor_category_id == $doctorCategory->id ? 'selected' : '' }}>
+                                            {{ $doctorCategory->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -133,7 +149,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <img class="elevation-3" id="prevImg"
-                                            src="{{ asset('uploads/doctor/'.$doctor->image) }}" width="150px" />
+                                            src="{{ asset('uploads/doctor/' . $doctor->image) }}" width="150px" />
                                     </div>
                                     <div class="col-md-8">
                                         <input type="file" id="inputFoto" name="image" accept="image/*"

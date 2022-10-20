@@ -69,36 +69,41 @@
                     </thead>
                     <tbody>
                         @foreach ($doctors as $doctor)
-                        <tr>
-                            <td>{{ $doctor->name }}</td>
-                            <td>{{ $doctor->email }}</td>
-                            <td>{{ $doctor->phone }}</td>
-                            <td>{{ $doctor->reg_no }}</td>
-                            <td>
-                                @php
-                                    $values = explode(",",$doctor->disease_id);
-                                @endphp
-                                @foreach ($diseases as $disease)
-                                    @if(in_array("$disease->id", $values))
-                                        <span class="right badge badge-info">{{ $disease->name }}</span>
-                                    @endif
-                                @endforeach
+                            <tr>
+                                <td>{{ $doctor->name }}</td>
+                                <td>{{ $doctor->email }}</td>
+                                <td>{{ $doctor->phone }}</td>
+                                <td>{{ $doctor->reg_no }}</td>
+                                <td>
+                                    @php
+                                        $values = json_decode($doctor->disease_id);
+                                    @endphp
 
-                            </td>
-                            <td>{{ $doctor->getDoctorCategoryName() }}</td>
-                            <td>
-                                <img src="{{ asset('uploads/doctor/'.$doctor->image) }}"
-                                        alt="" style="height: 50px; width: 50px">
-                            </td>
-                            <td>
-                                <small class="{{ $doctor->status == '1' ? 'bg-danger' : 'bg-success' }} p-1 rounded">{{ $doctor->status == '1' ? 'Inactive' : 'Active' }}</small>
-                            </td>
-                            <td>
-                                <a href="{{ route('admin.doctor.edit', ['id'=>$doctor->id]) }}">Edit</a>
-                                <a href="{{ route('admin.doctor.delete', ['id'=>$doctor->id]) }}">Delete</a>
-                            </td>
-                        </tr>
 
+                                    @foreach ($diseases as $disease)
+                                        @foreach ($values as $value)
+                                            @if ($disease->id == $value)
+                                                <span class="right badge badge-info">{{ $disease->name }}</span>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+
+                                </td>
+                                <td>{{ $doctor->category->name }}</td>
+                                <td>
+                                    <img src="{{ asset('uploads/doctor/' . $doctor->image) }}" alt=""
+                                        style="height: 50px; width: 50px">
+                                </td>
+                                <td>
+                                    <small
+                                        class="{{ $doctor->status == '1' ? 'bg-danger' : 'bg-success' }} p-1 rounded">{{ $doctor->status == '1' ? 'Inactive' : 'Active' }}</small>
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.doctor.show', ['id' => $doctor->id]) }}">View</a>
+                                    <a href="{{ route('admin.doctor.edit', ['id' => $doctor->id]) }}">Edit</a>
+                                    <a href="{{ route('admin.doctor.delete', ['id' => $doctor->id]) }}">Delete</a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

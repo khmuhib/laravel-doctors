@@ -66,6 +66,7 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
     Route::get('doctor/edit/{id}', [DoctorController::class, 'edit'])->name('admin.doctor.edit');
     Route::put('doctor/update/{id}', [DoctorController::class, 'update'])->name('admin.doctor.update');
     Route::get('doctor/delete/{id}', [DoctorController::class, 'delete'])->name('admin.doctor.delete');
+    Route::get('doctor/show/{id}', [DoctorController::class, 'show'])->name('admin.doctor.show');
 
     // Route::get('doctor/degree/list', [DoctorController::class, 'index'])->name('admin.doctor.index');
     // Route::get('doctor/degree/create', [DoctorController::class, 'create'])->name('admin.doctor.create');

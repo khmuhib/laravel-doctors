@@ -28,16 +28,16 @@ class Doctor extends Model
         return $this->belongsTo(DoctorCategory::class, 'doctor_category_id');
     }
 
+
+
     public function getDoctorCategoryName() {
         if($this->category) {
             return $this->category->name;
         }
     }
 
-    public function getDoctorImage()
-    {
-        return Storage::url($this->image);
-    }
+
+
 
 
 }
