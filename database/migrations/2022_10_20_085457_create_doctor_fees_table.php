@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_fees', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('fee_type');
+            $table->decimal('amount');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('patient_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->foreign('patient_id')->references('id')->on('patients');
             $table->timestamps();
         });
     }

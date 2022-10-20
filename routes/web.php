@@ -37,14 +37,15 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
     Route::controller(AkunController::class)
         ->prefix('akun')
         ->as('akun.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('showdata', 'dataTable')->name('dataTable');
-            Route::match(['get', 'post'], 'tambah', 'tambahAkun')->name('add');
-            Route::match(['get', 'post'], '{id}/ubah', 'ubahAkun')->name('edit');
-            Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
-        }
-    );
+        ->group(
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('showdata', 'dataTable')->name('dataTable');
+                Route::match(['get', 'post'], 'tambah', 'tambahAkun')->name('add');
+                Route::match(['get', 'post'], '{id}/ubah', 'ubahAkun')->name('edit');
+                Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
+            }
+        );
 
     Route::get('disease/list/', [DiseaseController::class, 'index'])->name('admin.disease.index');
     Route::get('disease/create/', [DiseaseController::class, 'create'])->name('admin.disease.create');

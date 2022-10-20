@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_trainnings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('title', 100);
+            $table->timestamp('from');
+            $table->timestamp('to');
+            $table->string('institute', 200);
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }

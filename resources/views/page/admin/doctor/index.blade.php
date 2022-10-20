@@ -44,12 +44,13 @@
             <div class="card-header">
                 <h3 class="card-title"></h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <a href="{{ route('admin.doctor.create') }}" class="btn btn-primary">Add Doctor</a>
+                    {{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
                         <i class="fas fa-times"></i>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
             <div class="card-body p-0" style="margin: 20px">

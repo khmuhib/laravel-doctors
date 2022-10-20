@@ -13,12 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doctor_compounders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('patients', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
+            $table->string('gender')->nullable();
+            $table->string('address')->nullable();
             $table->string('phone');
-            $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->string('email');
+            $table->string('blood_group')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('nid')->nullable();
+            $table->string('password');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctor_compounders');
+        Schema::dropIfExists('patients');
     }
 };

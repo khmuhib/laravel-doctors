@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_descriptions', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->longText('description',10000);
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('app_payments', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->tinyInteger('payment_status');
+            $table->decimal('payment_amount');
+            $table->unsignedBigInteger('patient_id');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->timestamps();
         });
     }

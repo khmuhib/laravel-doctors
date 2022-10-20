@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_experiences', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('job_location');
+            $table->timestamp('job_starting_date');
+            $table->timestamp('job_ending_date');
+            $table->string('designation');
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }

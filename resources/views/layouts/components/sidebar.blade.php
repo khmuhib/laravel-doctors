@@ -6,69 +6,41 @@ $links = [
         'icon' => 'fas fa-home',
         'is_multi' => false,
     ],
-
     [
-        'text' => 'Disease',
-        'icon' => 'fas fa-users',
-        'is_multi' => true,
-        'href' => [
-            [
-                'section_text' => 'Disease Add',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.disease.create'),
-            ],
-            [
-                'section_text' => 'Disease List',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.disease.index'),
-            ],
-        ],
+        'href' => route('admin.disease.index'),
+        'text' => 'Diease',
+        'icon' => 'fas fa-bug',
+        'is_multi' => false,
     ],
-
     [
+        'href' => route('admin.doctor.category.index'),
+        'text' => 'Doctor Category',
+        'icon' => 'fas fa-list',
+        'is_multi' => false,
+    ],
+    [
+        'href' => route('admin.doctor.index'),
         'text' => 'Doctor',
-        'icon' => 'fas fa-users',
-        'is_multi' => true,
-        'href' => [
-            [
-                'section_text' => 'Doctor Category Add',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.doctor.category.create'),
-            ],
-            [
-                'section_text' => 'Doctor Category List',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.doctor.category.index'),
-            ],
-            [
-                'section_text' => 'Doctor Add',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.doctor.create'),
-            ],
-            [
-                'section_text' => 'Doctor List',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('admin.doctor.index'),
-            ],
-        ],
+        'icon' => 'fas fa-user',
+        'is_multi' => false,
     ],
-    [
-        'text' => 'User',
-        'icon' => 'fas fa-users',
-        'is_multi' => true,
-        'href' => [
-            [
-                'section_text' => 'User List',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('akun.index'),
-            ],
-            [
-                'section_text' => 'User Edit',
-                'section_icon' => 'far fa-circle',
-                'section_href' => route('akun.add'),
-            ],
-        ],
-    ],
+    // [
+    //     'text' => 'Doctor',
+    //     'icon' => 'fas fa-users',
+    //     'is_multi' => true,
+    //     'href' => [
+    //         [
+    //             'section_text' => 'Doctor List',
+    //             'section_icon' => 'far fa-circle',
+    //             'section_href' => route('admin.doctor.index'),
+    //         ],
+    //         [
+    //             'section_text' => 'Doctor Add',
+    //             'section_icon' => 'far fa-circle',
+    //             'section_href' => route('admin.doctor.create'),
+    //         ]
+    //     ],
+    // ],
 ];
 $navigation_links = json_decode(json_encode($links));
 @endphp
@@ -78,9 +50,8 @@ $navigation_links = json_decode(json_encode($links));
     <a href="#" class="brand-link">
         <img src="{{ asset('vendor/adminlte3/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Flyte Solutions</span>
+        <span class="brand-text font-weight-light">DCL Admin Panel</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- SidebarSearch Form -->
@@ -95,7 +66,6 @@ $navigation_links = json_decode(json_encode($links));
                 </div>
             </div>
         </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"

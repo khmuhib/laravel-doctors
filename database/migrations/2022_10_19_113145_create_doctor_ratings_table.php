@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_ratings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->longText('comment',5000);
+            $table->integer('rating');
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->unsignedBigInteger('patient_id');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('set null');
             $table->timestamps();
         });
     }

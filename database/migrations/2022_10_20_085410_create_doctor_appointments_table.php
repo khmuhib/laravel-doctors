@@ -14,7 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctor_appointments', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('street_address', 200);
+            $table->string('district', 200);
+            $table->string('division', 200);
+            $table->time('in_time');
+            $table->time('out_time');
+            $table->string('to');
+            $table->string('from');
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }
