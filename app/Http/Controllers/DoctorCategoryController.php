@@ -9,25 +9,35 @@ use Illuminate\Support\Facades\DB;
 
 class DoctorCategoryController extends Controller
 {
-    
+
     public function index()
     {
         $doctorCategories = DB::table('doctor_categories')->get();
         return view('page.admin.doctor_category.index', compact('doctorCategories'));
     }
 
-    
+
     public function create()
     {
         return view('page.admin.doctor_category.create');
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:200|min:3|unique:doctor_categories',
         ]);
+
+        for ($i=7; $i <= 5000 ; $i++) {
+                $array[] =[
+                    'name' => 'CategoryTest'.$i,
+                    'status' => 0,
+                ] ;
+            };
+            DoctorCategory::insert($array);
+
+
 
         $date = new DateTime('now');
 
@@ -50,7 +60,7 @@ class DoctorCategoryController extends Controller
         //
     }
 
-    
+
     public function edit($id)
     {
         $doctorCategory = DB::table('doctor_categories')->find($id);
@@ -59,7 +69,7 @@ class DoctorCategoryController extends Controller
         //dd($doctorCategory);
     }
 
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -76,10 +86,10 @@ class DoctorCategoryController extends Controller
         return redirect()->route('admin.doctor.category.index')->with('status', 'Doctor Category Updated Successfully');
     }
 
-    
+
     public function delete($id)
     {
-        
+
         $doctorCategory = DB::table('doctor_categories')->find($id);
         $result = DB::table('doctor_categories')->where('id', $id)->delete();
 

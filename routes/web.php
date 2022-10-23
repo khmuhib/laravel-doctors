@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/', function () {
     //return view('welcome');
     return redirect('login');
 });
+
+//Route::get('muhib/test', [PatientController::class, 'muhib'])->name('muhib.test');
 
 Auth::routes();
 
@@ -69,12 +72,28 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
     Route::get('doctor/delete/{id}', [DoctorController::class, 'delete'])->name('admin.doctor.delete');
     Route::get('doctor/show/{id}', [DoctorController::class, 'show'])->name('admin.doctor.show');
 
+    Route::get('patient/list', [PatientController::class, 'index'])->name('admin.patient.index');
+    Route::get('patient/create', [PatientController::class, 'create'])->name('admin.patient.create');
+    Route::post('patient/store', [PatientController::class, 'store'])->name('admin.patient.store');
+    Route::get('patient/edit/{id}', [PatientController::class, 'edit'])->name('admin.patient.edit');
+    Route::put('patient/update/{id}', [PatientController::class, 'update'])->name('admin.patient.update');
+    Route::get('patient/delete/{id}', [PatientController::class, 'delete'])->name('admin.patient.delete');
+    Route::get('patient/show/{id}', [PatientController::class, 'show'])->name('admin.patient.show');
+
+
+
+
+
+
+
     // Route::get('doctor/degree/list', [DoctorController::class, 'index'])->name('admin.doctor.index');
     // Route::get('doctor/degree/create', [DoctorController::class, 'create'])->name('admin.doctor.create');
     // Route::post('doctor/degree//store', [DoctorController::class, 'store'])->name('admin.doctor.store');
     // Route::get('doctor/degree/edit/{id}', [DoctorController::class, 'edit'])->name('admin.doctor.edit');
     // Route::put('doctor/degree/update/{id}', [DoctorController::class, 'update'])->name('admin.doctor.update');
     // Route::get('doctor/degree/delete/{id}', [DoctorController::class, 'delete'])->name('admin.doctor.delete');
+
+
 
 
 });

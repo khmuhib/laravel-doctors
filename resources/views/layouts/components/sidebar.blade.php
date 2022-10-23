@@ -24,6 +24,12 @@ $links = [
         'icon' => 'fas fa-user',
         'is_multi' => false,
     ],
+    [
+        'href' => route('admin.patient.index'),
+        'text' => 'Patient',
+        'icon' => 'fas fa-user',
+        'is_multi' => false,
+    ],
     // [
     //     'text' => 'Doctor',
     //     'icon' => 'fas fa-users',

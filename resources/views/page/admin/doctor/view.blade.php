@@ -205,23 +205,23 @@
                     <form action="" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>Description 01</label>
+                            <label>Line 01</label>
                             <textarea name="job_description" rows="3" class="form-control" name="job_description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Description 02</label>
+                            <label>Line 02</label>
                             <textarea name="job_description" rows="3" class="form-control" name="job_description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Description 03</label>
+                            <label>Line 03</label>
                             <textarea name="job_description" rows="3" class="form-control" name="job_description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Description 04</label>
+                            <label>Line 04</label>
                             <textarea name="job_description" rows="3" class="form-control" name="job_description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Description 05</label>
+                            <label>Line 05</label>
                             <textarea name="job_description" rows="3" class="form-control" name="job_description"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -385,13 +385,13 @@
                                         aria-controls="home">Doctor Basic Info</a>
                                     <a class="list-group-item list-group-item-action" id="list-profile-list"
                                         data-toggle="list" href="#list-profile" role="tab"
-                                        aria-controls="profile">Profile</a>
+                                        aria-controls="profile">Experience</a>
                                     <a class="list-group-item list-group-item-action" id="list-messages-list"
                                         data-toggle="list" href="#list-messages" role="tab"
-                                        aria-controls="messages">Messages</a>
+                                        aria-controls="messages">Socail Link</a>
                                     <a class="list-group-item list-group-item-action" id="list-settings-list"
                                         data-toggle="list" href="#list-settings" role="tab"
-                                        aria-controls="settings">Settings</a>
+                                        aria-controls="settings">Degree</a>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -400,27 +400,28 @@
                                         aria-labelledby="list-home-list">
                                         <div class="my-1">
                                             <h5>Name</h5>
-                                            <p>Lorem ipsum dolor</p>
+                                            <p>{{ $doctor->name }}</p>
                                         </div>
                                         <div class="my-1">
-                                            <h5>Name</h5>
-                                            <p>Lorem ipsum dolor</p>
+                                            <h5>Email</h5>
+                                            <p>{{ $doctor->email }}</p>
                                         </div>
                                         <div class="my-1">
-                                            <h5>Name</h5>
-                                            <p>Lorem ipsum dolor</p>
+                                            <h5>Phone</h5>
+                                            <p>{{ $doctor->phone }}</p>
                                         </div>
                                         <div class="my-1">
-                                            <h5>Name</h5>
-                                            <p>Lorem ipsum dolor</p>
+                                            <h5>Reg No</h5>
+                                            <p>{{ $doctor->reg_no }}</p>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="list-profile" role="tabpanel"
-                                        aria-labelledby="list-profile-list">...</div>
-                                    <div class="tab-pane fade" id="list-messages" role="tabpanel"
-                                        aria-labelledby="list-messages-list">...</div>
-                                    <div class="tab-pane fade" id="list-settings" role="tabpanel"
-                                        aria-labelledby="list-settings-list">...</div>
+                                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
                                 </div>
                             </div>
                         </div>

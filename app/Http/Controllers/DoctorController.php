@@ -113,6 +113,7 @@ class DoctorController extends Controller
         $doctor['doctor_category_id'] = $request->doctor_category_id;
         $doctor['email'] = $request->email;
         $doctor['status'] = $request->status == true ? '1' : '0';
+        
         if($request->hasfile('image'))
         {
             if($doctosoldimage !=null){
