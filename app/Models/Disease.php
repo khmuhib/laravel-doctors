@@ -11,7 +11,9 @@ class Disease extends Model
 
     protected $fillable = [
         'name',
+        'name_bn'.
         'description',
+        'description_bn',
         'image'
     ];
 }

@@ -16,14 +16,17 @@ return new class extends Migration
         Schema::create('doctor_appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('street_address', 200);
+            $table->string('street_address_bn', 200);
             $table->string('district', 200);
+            $table->string('district_bn', 200);
             $table->string('division', 200);
+            $table->string('division_bn', 200);
             $table->time('in_time');
             $table->time('out_time');
             $table->string('to');
             $table->string('from');
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
             $table->timestamps();
         });
     }

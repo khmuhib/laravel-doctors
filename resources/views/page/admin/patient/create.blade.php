@@ -55,7 +55,7 @@
         <form method="post" enctype="multipart/form-data" action="{{ route('admin.patient.store') }}">
             @csrf
             <div class="row">
-                <div class="col-md-6 m-auto">
+                <div class="col-md-6">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Enter Patinet Information</h3>
@@ -166,6 +166,68 @@
                                             class="form-control" placeholder="Upload Image">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row py-2 px-4">
+                            <div class="col-12">
+                                <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
+                                {{-- <input type="submit" value="Save" class="btn btn-success float-right"> --}}
+                                <button type="submit" class="btn btn-success float-right">Submit</button>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">রুগীর তথ্য</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>নাম</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter Patient Name"
+                                    value="{{ old('name') }}" autocomplete="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>মোবাইল</label>
+                                <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number"
+                                    value="{{ old('phone') }}" autocomplete="phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label>ভোটার নাম্বার</label>
+                                <input type="text" name="nid" class="form-control"
+                                placeholder="Enter NID Number" value="{{ old('nid') }}" autocomplete="nid">
+                            </div>
+
+                            <div class="form-group">
+                                <label>লিঙ্গ</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="other">
+                                    <label class="form-check-label" for="inlineRadio2">Other</label>
+                                  </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>জন্ম তারিখ</label>
+                                <input type="date" name="dob" class="form-control"
+                                    placeholder="Enter Date Of Birth" value="{{ old('dob') }}" autocomplete="dob">
                             </div>
                         </div>
                         <div class="row py-2 px-4">

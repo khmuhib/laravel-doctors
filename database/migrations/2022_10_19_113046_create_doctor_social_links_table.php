@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('doctor_social_links', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->string('link', 1000);
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->unsignedBigInteger('social_id');
+            $table->foreign('social_id')->references('id')->on('status_types');
+            $table->longText('link');
             $table->timestamps();
         });
     }

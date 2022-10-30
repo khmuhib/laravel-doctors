@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('doctor_descriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('description',10000);
+            $table->longText('description_bn',10000);
             $table->unsignedBigInteger('doctor_id');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();

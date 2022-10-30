@@ -62,23 +62,58 @@
                                     value="{{ old('name') }}" autocomplete="name">
                             </div>
 
-                            <div class="form-group form-check">
+                            {{-- <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" name="status">
                                 <label class="form-check-label">Status</label>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
 
 
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
-                        {{-- <input type="submit" value="Save" class="btn btn-success float-right"> --}}
-                        <button type="submit" class="btn btn-success float-right">Submit</button>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
+                            {{-- <input type="submit" value="Save" class="btn btn-success float-right"> --}}
+                            <button type="submit" class="btn btn-success float-right">Submit</button>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">ডাক্তার এর ক্যাটেগরি</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse"><i
+                                        class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>নাম</label>
+                                <input type="text" name="name" class="form-control" placeholder="Disease Name"
+                                    value="{{ old('name') }}" autocomplete="name">
+                            </div>
+
+                            {{-- <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" name="status">
+                                <label class="form-check-label">Status</label>
+                            </div> --}}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="{{ route('home') }}" class="btn btn-secondary">Cancel</a>
+                            {{-- <input type="submit" value="Save" class="btn btn-success float-right"> --}}
+                            <button type="submit" class="btn btn-success float-right">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

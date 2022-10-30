@@ -28,9 +28,11 @@ class DiseaseController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|string|max:200|min:3|unique:diseases',
+            'name' => 'string|max:200|min:3|unique:diseases|nullable',
+            'name_bn' => 'string|max:200|min:3|unique:diseases|nullable',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1024|nullable',
-            'description' => 'required|string|max:5000|min:3',
+            'description' => 'string|max:5000|min:3|nullable',
+            'description_bn' => 'string|max:5000|min:3|nullable',
         ]);
 
         if ($request->hasfile('image')) {
@@ -46,7 +48,8 @@ class DiseaseController extends Controller
         $data = array(
             'name' => $request->name,
             'description' => $request->description,
-            'status' => $request->status == true ? '1' : '0',
+            'description_bn' => $request->description_bn,
+            'name_bn' => $request->name_bn,
             'image' => $request->image,
             'created_at' => $date,
         );
@@ -74,16 +77,19 @@ class DiseaseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:200|min:3',
+            'name' => 'string|max:200|min:3|nullable',
+            'name_bn' => 'string|max:200|min:3|nullable',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:1024|nullable',
-            'description' => 'required|string|max:5000|min:3',
+            'description' => 'string|max:5000|min:3|nullable',
+            'description_bn' => 'string|max:5000|min:3|nullable',
         ]);
 
         $olddata = Disease::where('id',$id)->where('name',$request->name)->first();
 
         if(empty($olddata)){
             $request->validate([
-                'name' => 'required|string|max:200|min:3|unique:diseases'
+                'name' => 'string|max:200|min:3|unique:diseases',
+                'name_bn' => 'string|max:200|min:3|unique:diseases',
             ]);
         }
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('doctor_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_bn');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

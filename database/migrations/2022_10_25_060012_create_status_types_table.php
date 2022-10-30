@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('diseases', function (Blueprint $table) {
+        Schema::create('status_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 200);
-            $table->string('name_bn', 200)->nullable();
-            $table->longText('description');
-            $table->longText('description_bn')->nullable();
-            $table->string('image')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->string('type_of_name', 50);
+            $table->string('name', 255);
+            $table->tinyInteger('type_of_status');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diseases');
+        Schema::dropIfExists('status_types');
     }
 };

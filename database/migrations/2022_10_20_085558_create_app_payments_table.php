@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->tinyInteger('payment_status');
             $table->decimal('payment_amount');
+            $table->decimal('payment_amount_bn');
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->timestamps();

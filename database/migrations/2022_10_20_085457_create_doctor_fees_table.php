@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('doctor_fees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('fee_type');
+            $table->string('fee_type_bn');
             $table->decimal('amount');
+            $table->decimal('amount_bn');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('patient_id');
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
